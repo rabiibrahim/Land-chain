@@ -78,20 +78,18 @@ App = {
     App.contracts.ERC721Token.deployed().then(function (instance) {
       console.log(instance);
       return (App.contractInstance = instance);
-    }
-  
+    });
   },
 
 
 
   // call the method approve that is located in the smart contract and show msg to the final user;
   approve: function () {
-    const key = $('#approve-key').val();
-    const id = $('#approve-id').val();
-    // replace me :)
+    const key = $("#approve-key").val();
+    const id = $("#approve-id").val();
     return App.contractInstance.approve(key, id);
-  }
-},
+  },
+
 
 
 
@@ -106,79 +104,79 @@ App = {
 
 
 
-// call the getApproved method that is located in the in smart contract and show msg to the user
-getApproved: function () {
-  const id = $('#is-approved-id').val();
-  // replace me :)
-},
+  // call the getApproved method that is located in the in smart contract and show msg to the user
+  getApproved: function () {
+    const id = $('#is-approved-id').val();
+    // replace me :)
+  },
 
 
 
 
-// call isApprovedForAll method and show result msg to the final user
-isApprovedForAll: function () {
-  const first = $('#is-approved-all-first').val();
-  const second = $('#is-approved-all-second').val();
-  // replace me :)
-},
+  // call isApprovedForAll method and show result msg to the final user
+  isApprovedForAll: function () {
+    const first = $('#is-approved-all-first').val();
+    const second = $('#is-approved-all-second').val();
+    // replace me :)
+  },
 
 
 
-// call balanceOf method and show the balance as message to the final user
-balanceOf: function () {
-  const key = $('#balance-key').val();
-  // replace me :)
-},
-
-
-
-
-// call exists method that is located in the smart contract and show message to the final user
-exists: function () {
-  const id = $('#exist-id').val();
-  // replace me :)
-},
+  // call balanceOf method and show the balance as message to the final user
+  balanceOf: function () {
+    const key = $('#balance-key').val();
+    // replace me :)
+  },
 
 
 
 
-
-
-// call ownerOf method and show message to the final user
-ownerOf: function () {
-  const id = $('#owner-id').val();
-  // replace me :)
-},
-
-
-
-
-// call transferFrom method that is located in the smart contract and show message to the final user
-transferFrom: function () {
-  const from = $('#transfer-from').val();
-  const to = $('#transfer-to').val();
-  const id = $('#transfer-id').val();
-  // replace me :)
-},
-
-
-
-// call safeTransferFrom method that is located in the smart contract and show message to the final user
-safeTransferFrom: function () {
-  const from = $('#safe-transfer-from').val();
-  const to = $('#safe-transfer-to').val();
-  const id = $('#safe-transfer-id').val();
-  // replace me :)
-},
+  // call exists method that is located in the smart contract and show message to the final user
+  exists: function () {
+    const id = $('#exist-id').val();
+    // replace me :)
+  },
 
 
 
 
 
-// call totalSupply method in the smart contract instance and show the result as message to the final user
-totalSupply: function () {
-  // replace me :)
-},
+
+  // call ownerOf method and show message to the final user
+  ownerOf: function () {
+    const id = $('#owner-id').val();
+    // replace me :)
+  },
+
+
+
+
+  // call transferFrom method that is located in the smart contract and show message to the final user
+  transferFrom: function () {
+    const from = $('#transfer-from').val();
+    const to = $('#transfer-to').val();
+    const id = $('#transfer-id').val();
+    // replace me :)
+  },
+
+
+
+  // call safeTransferFrom method that is located in the smart contract and show message to the final user
+  safeTransferFrom: function () {
+    const from = $('#safe-transfer-from').val();
+    const to = $('#safe-transfer-to').val();
+    const id = $('#safe-transfer-id').val();
+    // replace me :)
+  },
+
+
+
+
+
+  // call totalSupply method in the smart contract instance and show the result as message to the final user
+  totalSupply: function () {
+    // replace me :)
+  },
 
 };
 
