@@ -1,7 +1,3 @@
-import Web3 from 'web3';
-import truffle from '../../truffle';
-import contract from './truffle-contract'
-
 App = {
   web3Provider: null,
   contracts: {},
@@ -44,8 +40,15 @@ App = {
    */
   initWeb3: function () {
     // Specify default instance if no web3 instance provided
-    App.web3Provider = new Web3.providers.HttpProvider('http://localhost:8545');
-    web3 = new Web3(App.web3Provider);
+    if (typeof web3 !== 'undefined') {
+      // If a web3 instance is already provided by Meta Mask.
+      App.web3Provider = web3.currentProvider;
+      web3 = new Web3(web3.currentProvider);
+    } else {
+
+      App.web3Provider = new Web3.providers.HttpProvider('http://localhost:8545');
+      web3 = new Web3(App.web3Provider);
+    }
     return App.initContract();
   },
 
@@ -59,11 +62,10 @@ App = {
 
     $.getJSON('ERC721Token.json', (data) => {
       // replace me :)
-      App.contracts = TruffleContract(data);
-      App.contracts.setProvider(App.web3Provider);
+      App.contracts.ERC721Token = TruffleContract(data);
+      App.contracts.ERC721Token.setProvider(App.web3Provider);
+      return App.createContractInstance();
     });
-
-    return App.createContractInstance();
 
   },
 
@@ -73,14 +75,12 @@ App = {
    * when you get the deployed instance you can interact with the contract by calling the methods via the contract instance.
    */
   createContractInstance() {
-    // replace me :)
-    App.contracts.deployed().then(instance => {
-      App.contractInstance = instance;
-    })
-
+    App.contracts.ERC721Token.deployed().then(function (instance) {
+      console.log(instance);
+      return (App.contractInstance = instance);
+    }
+  
   },
-
-
 
 
 
@@ -89,8 +89,9 @@ App = {
     const key = $('#approve-key').val();
     const id = $('#approve-id').val();
     // replace me :)
-    console.log(App.contractInstance);
-  },
+    return App.contractInstance.approve(key, id);
+  }
+},
 
 
 
@@ -105,79 +106,79 @@ App = {
 
 
 
-  // call the getApproved method that is located in the in smart contract and show msg to the user
-  getApproved: function () {
-    const id = $('#is-approved-id').val();
-    // replace me :)
-  },
+// call the getApproved method that is located in the in smart contract and show msg to the user
+getApproved: function () {
+  const id = $('#is-approved-id').val();
+  // replace me :)
+},
 
 
 
 
-  // call isApprovedForAll method and show result msg to the final user
-  isApprovedForAll: function () {
-    const first = $('#is-approved-all-first').val();
-    const second = $('#is-approved-all-second').val();
-    // replace me :)
-  },
+// call isApprovedForAll method and show result msg to the final user
+isApprovedForAll: function () {
+  const first = $('#is-approved-all-first').val();
+  const second = $('#is-approved-all-second').val();
+  // replace me :)
+},
 
 
 
-  // call balanceOf method and show the balance as message to the final user
-  balanceOf: function () {
-    const key = $('#balance-key').val();
-    // replace me :)
-  },
-
-
-
-
-  // call exists method that is located in the smart contract and show message to the final user
-  exists: function () {
-    const id = $('#exist-id').val();
-    // replace me :)
-  },
+// call balanceOf method and show the balance as message to the final user
+balanceOf: function () {
+  const key = $('#balance-key').val();
+  // replace me :)
+},
 
 
 
 
-
-
-  // call ownerOf method and show message to the final user
-  ownerOf: function () {
-    const id = $('#owner-id').val();
-    // replace me :)
-  },
-
-
-
-
-  // call transferFrom method that is located in the smart contract and show message to the final user
-  transferFrom: function () {
-    const from = $('#transfer-from').val();
-    const to = $('#transfer-to').val();
-    const id = $('#transfer-id').val();
-    // replace me :)
-  },
-
-
-
-  // call safeTransferFrom method that is located in the smart contract and show message to the final user
-  safeTransferFrom: function () {
-    const from = $('#safe-transfer-from').val();
-    const to = $('#safe-transfer-to').val();
-    const id = $('#safe-transfer-id').val();
-    // replace me :)
-  },
+// call exists method that is located in the smart contract and show message to the final user
+exists: function () {
+  const id = $('#exist-id').val();
+  // replace me :)
+},
 
 
 
 
 
-  // call totalSupply method in the smart contract instance and show the result as message to the final user
-  totalSupply: function () {
-    // replace me :)
-  },
+
+// call ownerOf method and show message to the final user
+ownerOf: function () {
+  const id = $('#owner-id').val();
+  // replace me :)
+},
+
+
+
+
+// call transferFrom method that is located in the smart contract and show message to the final user
+transferFrom: function () {
+  const from = $('#transfer-from').val();
+  const to = $('#transfer-to').val();
+  const id = $('#transfer-id').val();
+  // replace me :)
+},
+
+
+
+// call safeTransferFrom method that is located in the smart contract and show message to the final user
+safeTransferFrom: function () {
+  const from = $('#safe-transfer-from').val();
+  const to = $('#safe-transfer-to').val();
+  const id = $('#safe-transfer-id').val();
+  // replace me :)
+},
+
+
+
+
+
+// call totalSupply method in the smart contract instance and show the result as message to the final user
+totalSupply: function () {
+  // replace me :)
+},
 
 };
 
