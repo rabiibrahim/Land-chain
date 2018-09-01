@@ -1,3 +1,7 @@
+import Web3 from 'web3';
+import truffle from '../../truffle';
+import contract from './truffle-contract'
+
 App = {
   web3Provider: null,
   contracts: {},
@@ -39,7 +43,10 @@ App = {
    * use the same network that you deployed your contract to
    */
   initWeb3: function () {
-    // replace me :)
+    // Specify default instance if no web3 instance provided
+    App.web3Provider = new Web3.providers.HttpProvider('http://localhost:8545');
+    web3 = new Web3(App.web3Provider);
+    return App.initContract();
   },
 
 
@@ -49,9 +56,15 @@ App = {
    * save the contract in contract object up ^
    */
   initContract: function () {
-    $.getJSON('ERC721Token.json', function (data) {
+
+    $.getJSON('ERC721Token.json', (data) => {
       // replace me :)
+      App.contracts = TruffleContract(data);
+      App.contracts.setProvider(App.web3Provider);
     });
+
+    return App.createContractInstance();
+
   },
 
 
@@ -61,9 +74,11 @@ App = {
    */
   createContractInstance() {
     // replace me :)
+    App.contracts.deployed().then(instance => {
+      App.contractInstance = instance;
+    })
+
   },
-
-
 
 
 
@@ -74,6 +89,7 @@ App = {
     const key = $('#approve-key').val();
     const id = $('#approve-id').val();
     // replace me :)
+    console.log(App.contractInstance);
   },
 
 
